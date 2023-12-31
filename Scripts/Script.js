@@ -46,7 +46,8 @@ function newYear(currentDate) {
 }
 
 function printNewYear() {
-  document.getElementById("YearNew").innerHTML = "Happy New Year!";
+  var currentDate = new Date();
+  document.getElementById("YearNew").innerHTML = "Happy "+ currentDate.getFullYear() + "!";
   document.getElementById("DaysMissing").innerHTML = "";
   document.getElementById("Time").innerHTML = "";
   document.getElementById("Year").innerHTML = "";
