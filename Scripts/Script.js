@@ -47,7 +47,8 @@ function newYear(currentDate) {
 
 function printNewYear() {
   var currentDate = new Date();
-  document.getElementById("YearNew").innerHTML = "Happy "+ currentDate.getFullYear() + "!";
+  document.getElementById("YearNew").innerHTML =
+    "Happy " + currentDate.getFullYear() + "!";
   document.getElementById("DaysMissing").innerHTML = "";
   document.getElementById("Time").innerHTML = "";
   document.getElementById("Year").innerHTML = "";
@@ -69,10 +70,20 @@ function createFirework(range) {
   }
 }
 
+function song() {
+  var currentDate = new Date();
+  const SONG = document.getElementById("song");
+  if (newYear(currentDate)) {
+    SONG.src = "../Song/firework-show-short-64657.mp3";
+    SONG.play();
+  }
+}
+
 countdownToNewYear();
 setInterval(countdownToNewYear, 1000);
 
 createFirework(range());
 setInterval(createFirework, 1000);
 
-
+song();
+setInterval(song, 20000);
