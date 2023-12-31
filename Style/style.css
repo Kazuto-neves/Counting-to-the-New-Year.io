@@ -1,0 +1,88 @@
+@font-face {
+    font-family: NewYear;
+    src: url("../Fonts/EndOfYear-nR5VP.otf");
+  }
+  @font-face {
+    font-family: Time;
+    src: url("../Fonts/DS-DIGIT.TTF");
+  }
+  body {
+    background: #234;
+  }
+  
+  @keyframes firework {
+    0% {
+      transform: translate(-50%, 60vh);
+      width: 0.5vmin;
+      opacity: 1;
+    }
+    50% {
+      width: 0.5vmin;
+      opacity: 1;
+    }
+    100% {
+      width: 45vmin;
+      opacity: 0;
+    }
+  }
+  .firework,
+  .firework::before,
+  .firework::after {
+    --top: 60vh;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.5vmin;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, #ffff00 0.2vmin, rgba(0, 0, 0, 0) 0) 50% 0%, radial-gradient(circle, #ffcc00 0.3vmin, rgba(0, 0, 0, 0) 0) 0% 50%, radial-gradient(circle, #ff9933 0.5vmin, rgba(0, 0, 0, 0) 0) 50% 99%, radial-gradient(circle, #ff6600 0.2vmin, rgba(0, 0, 0, 0) 0) 99% 50%, radial-gradient(circle, #ff5050 0.3vmin, rgba(0, 0, 0, 0) 0) 80% 90%, radial-gradient(circle, #ff0066 0.5vmin, rgba(0, 0, 0, 0) 0) 95% 90%, radial-gradient(circle, #ff3399 0.5vmin, rgba(0, 0, 0, 0) 0) 10% 60%, radial-gradient(circle, #ff33cc 0.2vmin, rgba(0, 0, 0, 0) 0) 31% 80%, radial-gradient(circle, #ff00ff 0.3vmin, rgba(0, 0, 0, 0) 0) 80% 10%, radial-gradient(circle, #cc33ff 0.2vmin, rgba(0, 0, 0, 0) 0) 90% 23%, radial-gradient(circle, #9966ff 0.3vmin, rgba(0, 0, 0, 0) 0) 45% 20%, radial-gradient(circle, #6666ff 0.5vmin, rgba(0, 0, 0, 0) 0) 13% 24%;
+    background-size: 0.5vmin 0.5vmin;
+    background-repeat: no-repeat;
+    animation: firework 2s infinite;
+  }
+  
+  .firework::before {
+    transform: translate(-50%, -50%) rotate(25deg) !important;
+  }
+  
+  .firework::after {
+    transform: translate(-50%, -50%) rotate(-37deg) !important;
+  }
+  
+  #flex-container {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1a1a1a;
+  }
+  
+  #flex-msg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .flex-item {
+    margin: 10px 0;
+    font-size: 100px;
+    color: #ffff00;
+    font-family: "NewYear", Arial, sans-serif;
+  }
+  
+  #Time {
+    background-color: #262626;
+    padding: 5px;
+    font-family: "Time", Arial, sans-serif;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .flex-item {
+      font-size: 60px; /* Reduzindo o tamanho da fonte para telas menores */
+    }
+  }/*# sourceMappingURL=style.css.map */
