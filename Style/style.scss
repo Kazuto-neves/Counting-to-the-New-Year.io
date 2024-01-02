@@ -73,6 +73,10 @@ body {
   align-items: center;
   height: 100vh;
   background-color: #1a1a1a;
+  &:hover{
+    background-color: #2a2a2a;
+    transition: .5s linear;
+  }
 }
 
 #flex-msg {

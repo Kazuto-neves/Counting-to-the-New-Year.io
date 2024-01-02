@@ -1,3 +1,5 @@
+const FLEX_CONTAINER = document.getElementById('flex-container');
+
 function countdownToNewYear() {
   var currentDate = new Date();
   var nextNewYear = new Date(currentDate.getFullYear() + 1, 0, 1);
@@ -70,14 +72,17 @@ function createFirework(range) {
   }
 }
 
-function song() {
+
+
+FLEX_CONTAINER.addEventListener('click', function() {
   var currentDate = new Date();
   const SONG = document.getElementById("song");
   if (newYear(currentDate)) {
-    SONG.src = "../Song/firework-show-short-64657.mp3";
+    SONG.src = "./Song/firework-show-short-64657.mp3";
+    SONG.loop = true; // Adiciona loop
     SONG.play();
   }
-}
+});
 
 countdownToNewYear();
 setInterval(countdownToNewYear, 1000);
@@ -85,5 +90,5 @@ setInterval(countdownToNewYear, 1000);
 createFirework(range());
 setInterval(createFirework, 1000);
 
-song();
-setInterval(song, 20000);
+start();
+setInterval(start, 20000);
