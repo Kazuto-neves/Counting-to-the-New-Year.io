@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: NewYear;
   src: url("../Fonts/EndOfYear-nR5VP.otf");
@@ -6,8 +7,11 @@
   font-family: Time;
   src: url("../Fonts/DS-DIGIT.TTF");
 }
-body {
+html, body {
   background: #234;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 @keyframes firework {
@@ -51,19 +55,32 @@ body {
 }
 
 #flex-container {
-  margin: 0;
+  position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw; /* Garantir que o contêiner ocupe 100% da largura da viewport */
   background-color: #1a1a1a;
+  box-sizing: border-box;
+  overflow: hidden; /* Evitar que elementos "vazem" para fora do contêiner */
 }
-#flex-container:hover {
-  background-color: #2a2a2a;
-  transition: 0.5s linear;
+
+#firework-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden; /* Evitar que os fogos passem dos limites do contêiner */
 }
 
 #flex-msg {
+  position: relative;
+  z-index: 2; /* Garante que o texto fique acima dos fogos */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,6 +102,16 @@ body {
   font-family: "Time", Arial, sans-serif;
 }
 
+@media (max-width: 600px) {
+  #flex-container {
+    flex-direction: column; /* Para telas pequenas, todos os itens ficam empilhados verticalmente */
+  }
+}
+@media (min-width: 1200px) {
+  #flex-container {
+    padding: 20px; /* Um padding maior em telas grandes */
+  }
+}
 @media screen and (max-width: 768px) {
   .flex-item {
     font-size: 60px; /* Reduzindo o tamanho da fonte para telas menores */
