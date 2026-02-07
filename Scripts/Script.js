@@ -1,5 +1,7 @@
 const FLEX_CONTAINER = document.getElementById('flex-container');
 
+let isAnalogMode = false;
+
 function countdownToNewYear() {
     var currentDate = new Date();
     var nextNewYear = new Date(currentDate.getFullYear() + 1, 0, 1);
@@ -18,7 +20,13 @@ function countdownToNewYear() {
     var seconds = formatClock(Math.floor((difference % (1000 * 60)) / 1000));
 
     document.getElementById("DaysMissing").innerHTML = "Faltam " + days + " dias.<br>";
-    document.getElementById("Time").innerHTML = hours + ":" + minutes + ":" + seconds;
+    
+    if (!isAnalogMode) {
+        document.getElementById("Time").innerHTML = hours + ":" + minutes + ":" + seconds;
+    } else {
+        updateAnalogClock(hours, minutes, seconds);
+    }
+    
     document.getElementById("Year").innerHTML = "Para " + YearNew;
     document.getElementById("YearNew").innerHTML = "";
 }
@@ -77,3 +85,48 @@ setInterval(countdownToNewYear, 1000);
 
 // Set interval for creating fireworks every second
 setInterval(createFirework, 1000);
+
+// Função para atualizar o relógio analógico
+function updateAnalogClock(hours, minutes, seconds) {
+    const hourHand = document.querySelector('.hour-hand');
+    const minuteHand = document.querySelector('.minute-hand');
+    const secondHand = document.querySelector('.second-hand');
+
+    // Converter strings para números
+    hours = parseInt(hours);
+    minutes = parseInt(minutes);
+    seconds = parseInt(seconds);
+
+    // Calcular os graus de rotação
+    const secondDegrees = (seconds / 60) * 360;
+    const minuteDegrees = (minutes / 60) * 360 + (seconds / 60) * 6;
+    const hourDegrees = (hours / 12) * 360 + (minutes / 60) * 30;
+
+    secondHand.style.transform = `rotate(${secondDegrees}deg)`;
+    minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
+    hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+}
+
+// Botão de alternância - agora o próprio relógio é clicável
+const digitalClock = document.getElementById('Time');
+const analogClock = document.getElementById('analog-clock');
+
+// Fazer o relógio digital clicável também
+digitalClock.style.cursor = 'pointer';
+
+// Função para alternar entre os modos
+function toggleClock() {
+    isAnalogMode = !isAnalogMode;
+    
+    if (isAnalogMode) {
+        digitalClock.classList.add('hidden');
+        analogClock.classList.remove('hidden');
+    } else {
+        digitalClock.classList.remove('hidden');
+        analogClock.classList.add('hidden');
+    }
+}
+
+// Adicionar evento de clique nos dois relógios
+digitalClock.addEventListener('click', toggleClock);
+analogClock.addEventListener('click', toggleClock);

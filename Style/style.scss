@@ -42,7 +42,6 @@ html, body {
   width: 0.5vmin;
   aspect-ratio: 1;
   background:
-    /* random backgrounds */
     radial-gradient(circle, #ffff00 0.2vmin, #0000 0) 50% 00%,
     radial-gradient(circle, #ffcc00 0.3vmin, #0000 0) 00% 50%,
     radial-gradient(circle, #ff9933 0.5vmin, #0000 0) 50% 99%,
@@ -54,8 +53,7 @@ html, body {
     radial-gradient(circle, #ff00ff 0.3vmin, #0000 0) 80% 10%,
     radial-gradient(circle, #cc33ff 0.2vmin, #0000 0) 90% 23%,
     radial-gradient(circle, #9966ff 0.3vmin, #0000 0) 45% 20%,
-    radial-gradient(circle, #6666ff 0.5vmin, #0000 0) 13% 24%
-    ;
+    radial-gradient(circle, #6666ff 0.5vmin, #0000 0) 13% 24%;
   background-size: 0.5vmin 0.5vmin;
   background-repeat: no-repeat;
   animation: firework 2s infinite;
@@ -76,10 +74,10 @@ html, body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100vw; /* Garantir que o contêiner ocupe 100% da largura da viewport */
+  width: 100vw;
   background-color: #1a1a1a;
   box-sizing: border-box;
-  overflow: hidden; /* Evitar que elementos "vazem" para fora do contêiner */
+  overflow: hidden;
 }
 
 #firework-container {
@@ -90,17 +88,15 @@ html, body {
   height: 100%;
   z-index: 1;
   pointer-events: none;
-  overflow: hidden; /* Evitar que os fogos passem dos limites do contêiner */
+  overflow: hidden;
 }
-
 
 #flex-msg {
   position: relative;
-  z-index: 2; /* Garante que o texto fique acima dos fogos */
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   padding: 20px;
   border-radius: 8px;
 }
@@ -112,26 +108,171 @@ html, body {
   font-family: 'NewYear', Arial, sans-serif;
 }
 
-#Time{
-    background-color: #262626;
-    padding: 5px;
-    font-family: 'Time', Arial, sans-serif;
+#Time {
+  background-color: #262626;
+  padding: 5px;
+  font-family: 'Time', Arial, sans-serif;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &.hidden {
+    display: none;
+  }
 }
 
+// Relógio Analógico
+.analog-clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.clock-face {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+  border: 8px solid #ffcc00;
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.3),
+              inset 0 0 20px rgba(0, 0, 0, 0.5);
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent);
+  }
+}
+
+.clock-number {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Time', Arial, sans-serif;
+  color: #ffff00;
+  text-shadow: 0 0 5px rgba(255, 255, 0, 0.8);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10px;
+  transform: rotate(var(--rotation));
+
+  span {
+    display: inline-block;
+    transform: rotate(calc(-1 * var(--rotation)));
+  }
+}
+
+.hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: top center;
+  background: #ffff00;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+.hour-hand {
+  width: 6px;
+  height: 50px;
+  margin-left: -3px;
+  background: linear-gradient(to bottom, #ffcc00, #ffff00);
+}
+
+.minute-hand {
+  width: 4px;
+  height: 70px;
+  margin-left: -2px;
+  background: linear-gradient(to bottom, #ffdd00, #ffff00);
+}
+
+.second-hand {
+  width: 2px;
+  height: 80px;
+  margin-left: -1px;
+  background: #ff5050;
+  box-shadow: 0 0 5px rgba(255, 80, 80, 0.7);
+}
+
+.center-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: #ffff00;
+  border-radius: 50%;
+  border: 2px solid #1a1a1a;
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+  z-index: 10;
+}
+
+// Media Queries
 @media (max-width: 600px) {
   #flex-container {
-    flex-direction: column; /* Para telas pequenas, todos os itens ficam empilhados verticalmente */
+    flex-direction: column;
+  }
+  
+  .clock-face {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .clock-number {
+    font-size: 14px;
+  }
+  
+  .hour-hand {
+    height: 40px;
+  }
+  
+  .minute-hand {
+    height: 55px;
+  }
+  
+  .second-hand {
+    height: 65px;
   }
 }
 
 @media (min-width: 1200px) {
   #flex-container {
-    padding: 20px; /* Um padding maior em telas grandes */
+    padding: 20px;
   }
 }
 
 @media screen and (max-width: 768px) {
-    .flex-item {
-        font-size: 60px; /* Reduzindo o tamanho da fonte para telas menores */
-    }
+  .flex-item {
+    font-size: 60px;
+  }
 }
