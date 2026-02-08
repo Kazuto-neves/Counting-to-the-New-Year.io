@@ -97,22 +97,20 @@ function updateAnalogClock(hours, minutes, seconds) {
     minutes = parseInt(minutes);
     seconds = parseInt(seconds);
 
-    // Calcular os graus de rotação
-    const secondDegrees = (seconds / 60) * 360;
-    const minuteDegrees = (minutes / 60) * 360 + (seconds / 60) * 6;
-    const hourDegrees = (hours / 12) * 360 + (minutes / 60) * 30;
+
+    // Calcular os graus de rotação (ajustados para que 0 aponte para 12 horas)
+    const secondDegrees = (seconds / 60) * 360 +100;
+    const minuteDegrees = (minutes / 60) * 360 + (seconds / 60) * 6 + 100;
+    const hourDegrees = (hours / 12) * 360 + (minutes / 60) * 30 + 100;
 
     secondHand.style.transform = `rotate(${secondDegrees}deg)`;
     minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
     hourHand.style.transform = `rotate(${hourDegrees}deg)`;
 }
 
-// Botão de alternância - agora o próprio relógio é clicável
+// Toggle control elements
 const digitalClock = document.getElementById('Time');
 const analogClock = document.getElementById('analog-clock');
-
-// Fazer o relógio digital clicável também
-digitalClock.style.cursor = 'pointer';
 
 // Função para alternar entre os modos
 function toggleClock() {
@@ -125,8 +123,20 @@ function toggleClock() {
         digitalClock.classList.remove('hidden');
         analogClock.classList.add('hidden');
     }
+
+    // update ARIA pressed state to reflect active display
+    if (digitalClock) digitalClock.setAttribute('aria-pressed', String(!isAnalogMode));
+    if (analogClock) analogClock.setAttribute('aria-pressed', String(isAnalogMode));
 }
 
-// Adicionar evento de clique nos dois relógios
+// Click handlers
 digitalClock.addEventListener('click', toggleClock);
 analogClock.addEventListener('click', toggleClock);
+
+// Keyboard activation for analog clock (it's a div made focusable)
+analogClock.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleClock();
+    }
+});

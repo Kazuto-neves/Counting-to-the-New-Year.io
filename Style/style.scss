@@ -114,6 +114,9 @@ html, body {
   font-family: 'Time', Arial, sans-serif;
   cursor: pointer;
   transition: transform 0.2s ease;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 
   &:hover {
     transform: scale(1.05);
@@ -125,6 +128,12 @@ html, body {
 
   &.hidden {
     display: none;
+  }
+
+  &:focus, &:focus-visible {
+    outline: 3px solid #ffcc00;
+    outline-offset: 6px;
+    border-radius: 6px;
   }
 }
 
@@ -147,6 +156,12 @@ html, body {
 
   &.hidden {
     display: none;
+  }
+
+  &:focus, &:focus-visible {
+  box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.35);
+  border-radius: 12px;
+  outline: none;
   }
 }
 
