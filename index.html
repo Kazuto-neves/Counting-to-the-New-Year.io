@@ -7,14 +7,31 @@
     <title>Counting to the New Year</title>
   </head>
   <body>
-    
-  </body>
-  <body>
     <div id="flex-container">
-      <div id="firework-container"></div> <!-- Container para os fogos de artifício -->
+      <div id="firework-container"></div> <!-- Container for the fireworks -->
       <div id="flex-msg">
         <p class="flex-item" id="DaysMissing"></p>
-        <p class="flex-item" id="Time"></p>
+        <button class="flex-item" id="Time" type="button" aria-pressed="false" aria-label="Toggle analog clock" title="Toggle analog clock"></button>
+        <div id="analog-clock" class="analog-clock hidden">
+          <div class="clock-face">
+            <div class="clock-number" style="--rotation: 0deg;"><span>12</span></div>
+            <div class="clock-number" style="--rotation: 30deg;"><span>1</span></div>
+            <div class="clock-number" style="--rotation: 60deg;"><span>2</span></div>
+            <div class="clock-number" style="--rotation: 90deg;"><span>3</span></div>
+            <div class="clock-number" style="--rotation: 120deg;"><span>4</span></div>
+            <div class="clock-number" style="--rotation: 150deg;"><span>5</span></div>
+            <div class="clock-number" style="--rotation: 180deg;"><span>6</span></div>
+            <div class="clock-number" style="--rotation: 210deg;"><span>7</span></div>
+            <div class="clock-number" style="--rotation: 240deg;"><span>8</span></div>
+            <div class="clock-number" style="--rotation: 270deg;"><span>9</span></div>
+            <div class="clock-number" style="--rotation: 300deg;"><span>10</span></div>
+            <div class="clock-number" style="--rotation: 330deg;"><span>11</span></div>
+            <div class="hand hour-hand"></div>
+            <div class="hand minute-hand"></div>
+            <div class="hand second-hand"></div>
+            <div class="center-dot"></div>
+          </div>
+        </div>
         <p class="flex-item" id="Year"></p>
         <p class="flex-item" id="YearNew"></p>
       </div>
